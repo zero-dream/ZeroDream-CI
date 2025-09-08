@@ -1,0 +1,13 @@
+#!/bin/bash
+# Copyright (C) 2000 ZeroDream
+
+# --------------------------------------------------
+
+# MergeRepo
+# source "$ZD_ScriptLibPath/MergeRepo.sh"
+# mergeArr=('zero-dream/RepoA' 'zero-dream/RepoB') # $ZeroDreamCI > $GITHUB_REPOSITORY > RepoA > RepoB
+# mergeRepo 'mergeArr'
+
+# --------------------------------------------------
+
+exit 0
