@@ -14,9 +14,15 @@ function hook() {
   # Param
   local scriptPath=$1
   # Hook
+  local hookPath="$ZD_HookPath/$scriptPath.hook"
   echo '--------------------------------------------------'
-  echo "Hook: $ZD_HookPathSet/$scriptPath.hook"
-  bash "$ZD_HookPathSet/$scriptPath.hook"
+  echo "Hook: $hookPath"
+  if [[ ! -f "$hookPath" ]]; then
+    echo 'Warning: Hook does not exist'
+    echo '--------------------------------------------------'
+    return 0
+  fi
+  bash "$hookPath"
   local state=$?
   echo "State: $state"
   echo '--------------------------------------------------'

@@ -3,11 +3,7 @@
 
 # --------------------------------------------------
 
-# ZeroDreamEnv
-setEnv 'ZD_DATE' "$(TZ=UTC-8 date +"%y%m%d%H%M%S")"
-
 # LibraryPath
-setEnv 'ZD_MainPath' "$GITHUB_WORKSPACE/ZeroDream"
 setEnv 'ZD_LibPath' "$ZD_MainPath/Library"
 setEnv 'ZD_AppLibPath' "$ZD_LibPath/Application"
 setEnv 'ZD_ScriptLibPath' "$ZD_LibPath/Script"

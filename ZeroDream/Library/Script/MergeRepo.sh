@@ -18,8 +18,9 @@ function mergeRepo() {
     repoName=$(echo -n "$repository" | md5sum | awk '{print $1}')
     # GitClone
     git clone --depth=1 https://github.com/$repository.git "$repoPath/$repoName/" || exit 1 # Exit
-    # DeleteGitDir
-    rm -rf "$repoPath/$repoName/.git/"
+    # DeleteDir
+    rm -rf "$repoPath/$repoName/.git/" # DeleteGitDir
+    rm -rf "$repoPath/$repoName/$ZD_HookPath/" # DeleteHookDir
     # MergeRepo
     cp -a "$GITHUB_WORKSPACE/." "$repoPath/$repoName/"
     find "$GITHUB_WORKSPACE/" -mindepth 1 -delete

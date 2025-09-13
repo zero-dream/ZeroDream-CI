@@ -9,6 +9,13 @@ scriptDir=$(dirname "${BASH_SOURCE[0]}")
 # Source
 source "$scriptDir/../Library/Script/SetEnv.sh"
 
+# ZeroDreamEnv
+setEnv 'ZD_DATE' "$(TZ=UTC-8 date +"%y%m%d%H%M%S")"
+setEnv 'ZD_Owner' 'zero-dream'
+setEnv 'ZD_MainPath' "$GITHUB_WORKSPACE/ZeroDream"
+setEnv 'ZD_HookPath' "$GITHUB_WORKSPACE/Hook"
+setEnv 'ZD_AppPath' "$GITHUB_WORKSPACE/Application"
+
 # --------------------------------------------------
 
 # CheckScript
@@ -21,8 +28,8 @@ find "$scriptDir/" -type f \
 ZeroDreamRepo="zero-dream/ZeroDream-CI"
 repoPath="$RUNNER_TEMP/ZeroDreamRepo-$(uuidgen | tr -d '-')/ZeroDreamCI"
 git clone --depth=1 https://github.com/$ZeroDreamRepo.git "$repoPath/" || exit 1 # Exit
-rm -rf "$GITHUB_WORKSPACE/ZeroDream/"
-cp -a "$repoPath/ZeroDream/" "$GITHUB_WORKSPACE/"
+find "$ZD_MainPath/" -mindepth 1 -delete
+cp -a "$repoPath/ZeroDream/." "$ZD_MainPath/"
 rm -rf "$repoPath/"
 
 # --------------------------------------------------
@@ -30,4 +37,3 @@ rm -rf "$repoPath/"
 # ZeroDreamCore
 source "$scriptDir/Script/Check.sh"
 source "$scriptDir/Script/EnvVar.sh"
-source "$scriptDir/Script/Setting.sh"

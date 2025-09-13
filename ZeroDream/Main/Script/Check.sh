@@ -4,9 +4,15 @@
 # --------------------------------------------------
 
 # CheckScript
+
 find "$GITHUB_WORKSPACE/" -type f \
   -iregex ".*\.\(sh\|hook\)$" \
   -exec chmod +x {} \;
-find "$GITHUB_WORKSPACE/ZeroDream/" -type f \
+
+find "$ZD_MainPath/" -type f \
+  ! -name '.gitkeep' \
+  -exec chmod +x {} \;
+
+find "$ZD_AppPath/" -type f \
   ! -name '.gitkeep' \
   -exec chmod +x {} \;
