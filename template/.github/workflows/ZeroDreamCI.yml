@@ -1,0 +1,49 @@
+# CI 项目
+name: ZeroDreamCI
+
+# CI 权限
+permissions: write-all
+
+# CI 计划
+on:
+  # 自动运行: 每天早上 4 点
+  schedule:
+    - cron: 0 20 * * *
+  # 手动运行
+  workflow_dispatch:
+    inputs:
+      TEST:
+        description: 'Test'
+        required: false
+        type: string
+        default: 'value'
+
+# CI 环境
+env:
+  # GITHUB ENV
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  # CI ENV
+  CI_TEST: ${{inputs.TEST}}
+
+# CI 任务
+jobs:
+  template:
+    name: ZeroDreamCI
+    runs-on: ubuntu-latest
+    steps:
+      - name: CheckoutProject
+        uses: actions/checkout@main
+
+      - name: InitZeroDreamCI
+        run: |
+          ZeroDreamCiPath="$RUNNER_TEMP/ZeroDreamCI-$(uuidgen | tr -d '-')"
+          git clone --depth=1 https://github.com/zero-dream/ZeroDream-CI.git "$ZeroDreamCiPath/"
+          chmod +x "$ZeroDreamCiPath/zerodream/main/init.sh"
+          source "$ZeroDreamCiPath/zerodream/main/init.sh"
+          # --------------------------------------------------
+          source "$ZD_ScriptLibPath/hook.sh"
+          hook 'ZeroDreamCI/InitZeroDreamCI'
+
+      - name: WriteCode
+        run: |
+          # ... code

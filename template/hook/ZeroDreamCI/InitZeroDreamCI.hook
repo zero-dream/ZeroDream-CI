@@ -1,0 +1,16 @@
+#!/bin/bash
+# Copyright (C) 2000 ZeroDream
+
+# --------------------------------------------------
+
+source "$ZD_ScriptLibPath/mergeRepo.sh"
+
+# --------------------------------------------------
+
+# MergeRepo
+mergeArr=('zero-dream/RepoA' 'zero-dream/RepoB')
+mergeRepo 'mergeArr'
+
+# --------------------------------------------------
+
+exit 0
